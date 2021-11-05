@@ -28,16 +28,15 @@ pipeline {
             }
             
             steps {
-                sh 'ls -ali'
-                //sh 'node --version'
-                //sh 'git --version'
-                //sh 'curl --version'
+                sh 'node --version'
+                sh 'git --version'
+                sh 'curl --version'
             }
             
             post {
                 always {
                     // I will always be executed
-                    echo "Hello world"
+                    //echo "Hello world"
                 }
                         
                 success {
