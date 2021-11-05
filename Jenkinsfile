@@ -34,10 +34,10 @@ pipeline {
             }
             
             post {
-                always {
+                //always {
                     // I will always be executed
                     //echo "Hello world"
-                }
+                //}
                         
                 success {
                     // I will be executed if i success
