@@ -3,10 +3,10 @@ pipeline {
 
     triggers {
         // will be triggered every hour
-        cron('H * * * *')
+        //cron('H * * * *')
         
         // Will check for changes in the github project to trigger it
-        //pollSCM('* * * * *')
+        pollSCM('* * * * *')
         
         // If Job job1 or job2 is triggered and finished with success it will trigger this pipeline
         //upstream(upstreamProjects: 'job1,job2', threshold: hudson.model.Result.SUCCESS)
