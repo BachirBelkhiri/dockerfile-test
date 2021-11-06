@@ -114,7 +114,7 @@ pipeline {
         
         stage('Fail Test') {
             steps {
-                sh 'exit 1'                
+                sh 'exit 0 || exit 1'                
             }
             
             post {
