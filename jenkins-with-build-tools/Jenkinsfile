@@ -12,10 +12,10 @@ pipeline {
         steps {
             echo 'executing yarn or npm ...'
             nodejs('Node-Instance') {
-                sh 'yarn version'
+                sh 'yarn --version'
                 //sh 'yarn install'
                 //sh 'yarn build'
-                sh 'npm version'
+                sh 'npm --version'
                 //sh 'npm install'
                 //sh 'npm build'
             }            
