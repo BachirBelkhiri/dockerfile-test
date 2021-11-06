@@ -111,5 +111,22 @@ pipeline {
             }
             
         }
+        
+        stage('Fail Test') {
+            steps {
+                sh 'exit 1'                
+            }
+            
+            post {
+                success {
+                    slackSend teamDomain: 'letshavesomefundudes', channel: '#devops', color: 'good', tokenCredentialId: 'slack-token',  failOnError: true, message: "Test Success ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+                }
+                
+                failure {
+                    slackSend teamDomain: 'letshavesomefundudes', channel: '#devops', color: 'danger', tokenCredentialId: 'slack-token',  failOnError: true, message: "Test Failure ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+                }
+            }
+
+        }
     }
 }
