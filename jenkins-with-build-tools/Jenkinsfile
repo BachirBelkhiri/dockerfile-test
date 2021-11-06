@@ -27,7 +27,7 @@ pipeline {
 
         steps {
             echo 'executing gradle or maven ...'
-            sh './gradlew -v'
+            sh 'gradle -v'
             sh 'mvn --version'
         }
 
