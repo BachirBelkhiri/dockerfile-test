@@ -20,19 +20,32 @@ pipeline {
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     }
     
+    environment { 
+        PYTHON_VERSION = '3.9'
+    }
+    
     stages {
-        
-        stage('SCM Poll') {
-            //agent { dockerfile true }
+        stage('General') {
+            environment { 
+                AN_ACCESS_KEY = credentials('slack-token') 
+            }
             steps {
-                //git 'https://github.com/BachirBelkhiri/dockerfile-test.git'
-                sh 'ls -ali'
-                
+                sh 'printenv'
                 echo "Hello ${params.PERSON}"
                 echo "Biography: ${params.BIOGRAPHY}"
                 echo "Toggle: ${params.TOGGLE}"
                 echo "Choice: ${params.CHOICE}"
                 echo "Password: ${params.PASSWORD}"
+
+            }
+        }
+        
+        
+        stage('SCM Poll') {
+            //agent { dockerfile true }
+            steps {
+                //git 'https://github.com/BachirBelkhiri/dockerfile-test.git'
+                sh 'ls -ali'                
             }
             
             post {
