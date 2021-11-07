@@ -10,7 +10,7 @@ pipeline {
 
     environment {
         DEPLOY_TEST='true'
-        DEPLOY_PROD='false'
+        DEPLOY_PROD='true'
     }
 
     stages {
