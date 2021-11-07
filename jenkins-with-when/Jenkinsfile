@@ -8,11 +8,11 @@ pipeline {
 
     stages {
         stage('Building Dev Branch') {
-
-            agent {
-                any
-                //label "Slave Linux"
-            }
+            
+            agent any
+            //agent {
+            //    label "Slave Linux"
+            //}
 
             when {
                 branch 'dev'
@@ -33,10 +33,10 @@ pipeline {
 
         stage('Building Master Branch') {
 
-            agent {
-                any
-                //label "Slave Linux Prod"
-            }
+            agent any
+            //agent {
+            //    label "Slave Linux Prod"
+            //}
 
             when {
                 branch 'master'
