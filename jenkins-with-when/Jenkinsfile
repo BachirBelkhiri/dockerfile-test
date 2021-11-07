@@ -38,7 +38,7 @@ pipeline {
 
             when {
                 branch 'master'
-                environment name: 'DEPLOY_PROD', value: true
+                environment name: 'DEPLOY_PROD', value: 'true'
 
                 anyOf {
                     triggeredBy 'SCMTrigger'
