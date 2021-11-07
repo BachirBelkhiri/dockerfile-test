@@ -2,8 +2,8 @@ pipeline {
     agent none
 
     environment {
-        DEPLOY_TEST = false
-        DEPLOY_PROD = false
+        DEPLOY_TEST='false'
+        DEPLOY_PROD='false'
     }
 
     stages {
@@ -15,7 +15,7 @@ pipeline {
 
             when {
                 branch 'dev'
-                environment name: 'DEPLOY_TEST', value: true
+                environment name: 'DEPLOY_TEST', value: 'true'
 
                 anyOf {
                     triggeredBy 'SCMTrigger'
