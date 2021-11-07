@@ -1,6 +1,13 @@
 pipeline {
     agent none
 
+    triggers {
+        //cron('H * * * *')
+        
+        pollSCM('* * * * *')
+
+    }
+
     environment {
         DEPLOY_TEST='false'
         DEPLOY_PROD='false'
