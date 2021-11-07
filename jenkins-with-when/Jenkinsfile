@@ -10,7 +10,7 @@ pipeline {
 
     environment {
         DEPLOY_TEST='true'
-        DEPLOY_PROD='true'
+        DEPLOY_PROD='false'
     }
 
     stages {
@@ -46,13 +46,16 @@ pipeline {
             //}
 
             when {
-                branch 'master'
-                environment name: 'DEPLOY_PROD', value: 'true'
+                allOf {}
 
-                anyOf {
-                    triggeredBy 'SCMTrigger'
-                    triggeredBy 'TimerTrigger'
-                    triggeredBy 'BuildUpstreamCause'
+                    branch 'master'
+                    environment name: 'DEPLOY_PROD', value: 'true'
+
+                    anyOf {
+                        triggeredBy 'SCMTrigger'
+                        triggeredBy 'TimerTrigger'
+                        triggeredBy 'BuildUpstreamCause'
+                    }
                 }
             }
 
