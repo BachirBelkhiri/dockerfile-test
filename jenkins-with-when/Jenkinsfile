@@ -46,7 +46,7 @@ pipeline {
             //}
 
             when {
-                allOf {}
+                allOf {
 
                     branch 'master'
                     environment name: 'DEPLOY_PROD', value: 'true'
