@@ -1,37 +1,58 @@
 pipeline {
-    agent any
+    agent none
 
-    tools {
-        gradle "Gradle-Instance"
-        maven 'Apache-Maven-Instance'
+    environment {
+        DEPLOY_TEST = false
+        DEPLOY_PROD = false
     }
 
     stages {
-        stage('Frontend Building') {
+        stage('Building Dev Branch') {
 
-        steps {
-            echo 'executing yarn or npm ...'
-            nodejs('Node-Instance') {
-                sh 'yarn --version'
-                //sh 'yarn install'
-                //sh 'yarn build'
-                sh 'npm --version'
-                //sh 'npm install'
-                //sh 'npm build'
-            }            
-        }
+            agent {
+                label "Slave Linux"
+            }
 
-        }
+            when {
+                branch 'dev'
+                environment name: 'DEPLOY_TEST', value: true
 
-    stage('Backend Building') {
+                anyOf {
+                    triggeredBy 'SCMTrigger'
+                    triggeredBy 'TimerTrigger'
+                    triggeredBy 'BuildUpstreamCause'
+                }
+            }
 
-        steps {
-            echo 'executing gradle or maven ...'
-            sh 'gradle -v'
-            sh 'mvn --version'
-        }
+            steps {
+                echo 'Deploying dev branch to test servers'
+            }
 
         }
+
+        stage('Building Master Branch') {
+
+            agent {
+                label "Slave Linux Prod"
+            }
+
+            when {
+                branch 'master'
+                environment name: 'DEPLOY_PROD', value: true
+
+                anyOf {
+                    triggeredBy 'SCMTrigger'
+                    triggeredBy 'TimerTrigger'
+                    triggeredBy 'BuildUpstreamCause'
+                }
+            }
+
+            steps {
+                echo 'Deploying master branch to prod servers'
+            }
+
+        }
+        
 
     }
 
