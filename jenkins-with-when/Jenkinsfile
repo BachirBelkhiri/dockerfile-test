@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+
+    tools {
+        gradle "Gradle-Instance"
+        maven 'Apache-Maven-Instance'
+    }
+
+    stages {
+        stage('Frontend Building') {
+
+        steps {
+            echo 'executing yarn or npm ...'
+            nodejs('Node-Instance') {
+                sh 'yarn --version'
+                //sh 'yarn install'
+                //sh 'yarn build'
+                sh 'npm --version'
+                //sh 'npm install'
+                //sh 'npm build'
+            }            
+        }
+
+        }
+
+    stage('Backend Building') {
+
+        steps {
+            echo 'executing gradle or maven ...'
+            sh 'gradle -v'
+            sh 'mvn --version'
+        }
+
+        }
+
+    }
+
+}
